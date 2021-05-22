@@ -1,6 +1,7 @@
 from game.console import Console
-# from jumper import Jumper
+from game.jumper import Jumper
 from game.words import Words
+import webbrowser
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -23,9 +24,10 @@ class Director:
             self (Director): an instance of Director.
         """
         self.console = Console()
-        # self.jumper = Jumper()
+        self.jumper = Jumper()
         self.keep_playing = True
         self.words = Words()
+        self.good_guess = True
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -37,6 +39,7 @@ class Director:
             self.get_inputs()
             self.do_updates()
             self.do_outputs()
+        self.console.write(f'The word was "{self.words.word}".')
 
     def get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -45,9 +48,10 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self.console.write(self.words.show_lines())
+        self.console.write(self.words.show_lines() + "\n")
+        self.console.write(self.jumper.jumper_output())
         guess = input("Guess a letter [a-z]: ").lower()
-        self.words.get_lines(guess)
+        self.good_guess = self.words.get_lines(guess)
         
         
     def do_updates(self):
@@ -58,7 +62,15 @@ class Director:
             self (Director): An instance of Director.
         """
         if self.words.check_for_dashes():
+            self.console.write("Great job! We are so proud of you!")
             self.keep_playing = False
+        
+        if not self.good_guess:
+            del self.jumper.jumper_list[0]
+            if self.jumper.jumper_list[0] == "   0   ":
+                webbrowser.open("https://www.youtube.com/watch?v=oHg5SJYRHA0&ab_channel=cotter548")
+                self.keep_playing = False
+
             
         
     def do_outputs(self):

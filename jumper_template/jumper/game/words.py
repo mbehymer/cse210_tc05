@@ -10,7 +10,7 @@ class Words():
         self.current_word = [ "_" for x in range(len(self.word))]
 
     def __load_words(self):
-        with open("jumper_template\jumper\game\words.txt") as word_list:
+        with open("jumper_template/jumper/game/words.txt") as word_list:
             word_list = word_list.read()
             word_list = word_list.split()
         
@@ -34,6 +34,9 @@ class Words():
             for i in range(len(self.word)):
                 if guess == self.word[i]:
                     self.current_word[i] = guess
+            return True
+        else:
+            return False
     
     def check_for_dashes(self):
         """Read previous line"""
