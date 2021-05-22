@@ -35,3 +35,7 @@ root                    (project root folder)
 ## Authors
 ---
 * TODO: Add your names and emails here
+
+Samuel Rios-Lazo -- rioslazosamuel@gmail.com
+Matthew Behymer -- beh20004@byui.edu
+Kevin Jones -- kevinnjones117@gmail.com
