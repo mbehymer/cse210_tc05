@@ -13,8 +13,8 @@ class Director:
     Attributes:
         console (Console): An instance of the class of objects known as Console.
         keep_playing (boolean): Whether or not the game can continue.
-        hunter (Hunter): An instance of the class of objects known as Hunter.
-        rabbit (Rabbit): An instance of the class of objects known as Rabbit.
+        jumper (Jumper): An instance of the class of objects known as Jumper.
+        words (Words): An instance of the class of objects known as Words.
     """
 
     def __init__(self):
@@ -38,12 +38,11 @@ class Director:
         while self.keep_playing:
             self.get_inputs()
             self.do_updates()
-            self.do_outputs()
         self.console.write(f'The word was "{self.words.word}".')
 
     def get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
-        that means moving the hunter to a new location.
+        that means getting a guessed letter from the user.
 
         Args:
             self (Director): An instance of Director.
@@ -56,7 +55,7 @@ class Director:
         
     def do_updates(self):
         """Updates the important game information for each round of play. In 
-        this case, that means the rabbit watches the hunter.
+        this case, that means checking if the player guessed correctly or not.
 
         Args:
             self (Director): An instance of Director.
@@ -70,16 +69,3 @@ class Director:
             if self.jumper.jumper_list[0] == "   0   ":
                 webbrowser.open("https://www.youtube.com/watch?v=oHg5SJYRHA0&ab_channel=cotter548")
                 self.keep_playing = False
-
-            
-        
-    def do_outputs(self):
-        """Outputs the important game information for each round of play. In 
-        this case, that means the rabbit provides a hint.
-
-        Args:
-            self (Director): An instance of Director.
-        """
-        # hint = self.rabbit.get_hint()
-        # self.console.write(hint)
-        # self.keep_playing = (self.rabbit.distance[-1] != 0)
